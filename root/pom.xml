@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.tlp</groupId>
+    <artifactId>exercise-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Tlp Exercise</name>
+    <description>Tlp exercise to get hired!</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dto</module>
+        <module>data</module>
+        <module>../backend</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-boot-mail.version>2.7.0</spring-boot-mail.version>
+
+        <log4j2.version>2.15.0</log4j2.version>
+    </properties>
+</project>
