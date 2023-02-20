@@ -1,4 +1,4 @@
-package org.tlp.dto.mapper;
+package org.tlp.mapper.dto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,6 +7,8 @@ import org.tlp.internal.Customer;
 import org.tlp.mapper.Mapper;
 
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @Component
 public class CustomerDtoMapper implements Mapper<Customer, CustomerDto> {
@@ -20,15 +22,17 @@ public class CustomerDtoMapper implements Mapper<Customer, CustomerDto> {
 
     @Override
     public CustomerDto mapTo(Customer obj) {
-        return new CustomerDto(obj.firstName(), obj.lastName(),
+        return new CustomerDto(obj.id(), obj.firstName(), obj.lastName(),
                 obj.fiscalCode(), obj.address(),
-                obj.associatedDevices().stream().map(deviceDtoMapper::mapFrom).collect(Collectors.toList()));
+                obj.associatedDevices().stream().map(deviceDtoMapper::mapFrom)
+                        .collect(toList()));
     }
 
     @Override
     public Customer mapFrom(CustomerDto obj) {
         return new Customer(null, obj.getFirstName(), obj.getLastName(),
                 obj.getFiscalCode(), obj.getAddress(),
-                obj.getAssociatedDevices().stream().map(deviceDtoMapper::mapTo).collect(Collectors.toList()));
+                obj.getAssociatedDevices().stream().map(deviceDtoMapper::mapTo)
+                        .collect(toList()));
     }
 }
