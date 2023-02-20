@@ -50,6 +50,15 @@ public class DeviceEntity {
     public void setStatus(DeviceStatusEntity status) {
         this.status = status;
     }
+
+    public CustomerEntity getCustomerEntity() {
+        return customerEntity;
+    }
+
+    public void setCustomerEntity(CustomerEntity customerEntity) {
+        this.customerEntity = customerEntity;
+    }
+
     @Override
     public String toString() {
         return "DeviceEntity{" + "id=" + id + ", uuid='" + uuid + '\'' + ", color='" + color + '\'' + ", status=" + status + '}';
