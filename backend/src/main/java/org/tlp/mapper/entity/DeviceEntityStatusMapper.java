@@ -1,4 +1,4 @@
-package org.tlp.entity.mapper;
+package org.tlp.mapper.entity;
 
 import org.springframework.stereotype.Component;
 import org.tlp.entity.DeviceStatusEntity;

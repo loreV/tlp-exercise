@@ -1,9 +1,11 @@
-package org.tlp.entity.mapper;
+package org.tlp.mapper.entity;
 
+import org.springframework.stereotype.Component;
 import org.tlp.entity.DeviceEntity;
 import org.tlp.internal.Device;
 import org.tlp.mapper.Mapper;
 
+@Component
 public class DeviceEntityMapper implements Mapper<DeviceEntity, Device> {
 
     private final DeviceEntityStatusMapper deviceEntityStatusMapper;

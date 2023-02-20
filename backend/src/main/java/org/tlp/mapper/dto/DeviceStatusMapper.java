@@ -1,4 +1,4 @@
-package org.tlp.dto.mapper;
+package org.tlp.mapper.dto;
 
 import org.springframework.stereotype.Component;
 import org.tlp.dto.DeviceStatusDto;
