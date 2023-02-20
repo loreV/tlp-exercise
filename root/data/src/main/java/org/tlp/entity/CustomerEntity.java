@@ -3,13 +3,15 @@ package org.tlp.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="CUSTOMER_ENTITY_ID")
     private List<DeviceEntity> associatedDevices;
     private String firstName;
     private String lastName;
