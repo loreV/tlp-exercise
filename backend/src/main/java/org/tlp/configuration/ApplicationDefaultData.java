@@ -19,20 +19,30 @@ public class ApplicationDefaultData {
     private final boolean defaultData;
 
     @Autowired
-    public ApplicationDefaultData(CustomerRepository customerRepository, DeviceRepository deviceRepository, @Value("app.defaultData:true") String isDefaultData) {
+    public ApplicationDefaultData(CustomerRepository customerRepository,
+                                  DeviceRepository deviceRepository,
+                                  @Value("${app.defaultData}") String isDefaultData) {
         this.customerRepository = customerRepository;
         this.deviceRepository = deviceRepository;
-        this.defaultData = Boolean.getBoolean(isDefaultData);
+        this.defaultData = Boolean.parseBoolean(isDefaultData);
     }
 
     @PostConstruct
     public void init() {
         if (defaultData) {
-            DeviceEntity deviceEntity = deviceRepository.save(new DeviceEntity("1234345UXADSFD", "Red", DeviceStatusEntity.ACTIVE));
-            customerRepository.save(new CustomerEntity(
-                    "Mario", "Rossi", "MARIOROSSIFISCAL",
-                    "Via Mario Rosso 11", listOf(deviceEntity)));
+            createStubElements();
         }
+    }
+
+    private void createStubElements() {
+        deviceRepository
+                .save(new DeviceEntity("1234345UXADSFD", "Red", DeviceStatusEntity.ACTIVE));
+        CustomerEntity customerEntity = customerRepository.save(new CustomerEntity(
+                "Mario", "Rossi", "MARIOROSSIFISCAL",
+                "Via Mario Rosso 11", listOf()));
+        CustomerEntity reloadedEntity = customerRepository.findById(customerEntity.getId()).get();
+        reloadedEntity.setAssociatedDevices(deviceRepository.findAll());
+        customerRepository.save(reloadedEntity);
     }
 
 }
