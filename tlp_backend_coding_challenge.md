@@ -5,10 +5,10 @@
 Realizzare un set di api **REST compliant** che permettano di gestire operazioni CRUD di anagrafica utente e device associati, con le seguenti richieste business:
 - L'utente customer ha come set di dati nome, cognome, codice fiscale e indirizzo
 - Un device ha un codice **uuid**, uno stato (**ACTIVE, INACTIVE, LOST**) e un colore
-- Ogni utente può avere fino a 2 device associati
-- Di un utente è possibile modificare solo l'indirizzo
-- Di un device è possibile modificare lo stato e il colore
-- Dovrà essere possibile recuperare i dati aggregati di utente e device
+  - Ogni utente può avere fino a 2 device associati
+  OK - Di un utente è possibile modificare solo l'indirizzo - -- -- ok
+  OK- Di un device è possibile modificare lo stato e il colore ---- 
+  OK - Dovrà essere possibile recuperare i dati aggregati di utente e device
 - Dovrà essere possibile verificare, dato un uuid device, che questo sia presente o meno
 - Dovrà essere possibile cancellare un device
  

@@ -7,17 +7,17 @@ import java.util.List;
 @Entity
 public class CustomerEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private List<DeviceEntity> associatedDevices;
     private String firstName;
     private String lastName;
     private String fiscalCode;
     private String address;
 
-    protected CustomerEntity() {}
+    protected CustomerEntity() {
+    }
 
     public CustomerEntity(String firstName, String lastName,
                           String fiscalCode, String address,
@@ -51,6 +51,26 @@ public class CustomerEntity {
 
     public List<DeviceEntity> getAssociatedDevices() {
         return associatedDevices;
+    }
+
+    public void setAssociatedDevices(List<DeviceEntity> associatedDevices) {
+        this.associatedDevices = associatedDevices;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFiscalCode(String fiscalCode) {
+        this.fiscalCode = fiscalCode;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

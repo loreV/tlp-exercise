@@ -1,22 +1,27 @@
 package org.tlp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "Device")
+@Table(name = "Device")
 public class DeviceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     private String uuid;
     private String color;
     private DeviceStatusEntity status;
 
-    public DeviceEntity() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CustomerEntity customerEntity;
 
-    public DeviceEntity(String uuid, String color, DeviceStatusEntity status) {
+    public DeviceEntity() {
+    }
+
+    public DeviceEntity(String uuid,
+                        String color,
+                        DeviceStatusEntity status) {
         this.uuid = uuid;
         this.color = color;
         this.status = status;
@@ -38,6 +43,13 @@ public class DeviceEntity {
         return id;
     }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setStatus(DeviceStatusEntity status) {
+        this.status = status;
+    }
     @Override
     public String toString() {
         return "DeviceEntity{" + "id=" + id + ", uuid='" + uuid + '\'' + ", color='" + color + '\'' + ", status=" + status + '}';
