@@ -10,6 +10,7 @@ import org.tlp.mapper.entity.CustomerEntityMapper;
 import org.tlp.repository.CustomerRepository;
 import org.tlp.repository.DeviceRepository;
 import org.tlp.resource.request.CustomerCreateRequest;
+import org.tlp.service.provider.CustomerEntityProvider;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,15 +26,18 @@ public class CustomerService {
     private final DeviceRepository deviceRepository;
     private final CustomerDtoMapper customerDtoMapper;
     private final CustomerEntityMapper customerEntityMapper;
+    private final CustomerEntityProvider customerEntityProvider;
 
     public CustomerService(CustomerRepository customerRepository,
                            DeviceRepository deviceRepository,
                            CustomerDtoMapper customerDtoMapper,
-                           CustomerEntityMapper customerEntityMapper) {
+                           CustomerEntityMapper customerEntityMapper,
+                           CustomerEntityProvider customerEntityProvider) {
         this.customerRepository = customerRepository;
         this.deviceRepository = deviceRepository;
         this.customerDtoMapper = customerDtoMapper;
         this.customerEntityMapper = customerEntityMapper;
+        this.customerEntityProvider = customerEntityProvider;
     }
 
     public List<CustomerDto> getAll() {
@@ -55,9 +59,8 @@ public class CustomerService {
     }
 
     public CustomerDto create(CustomerCreateRequest createRequest) {
-        CustomerEntity customerEntity =
-                new CustomerEntity(createRequest.getFirstName(), createRequest.getLastName(),
-                        createRequest.getFiscalCode(), createRequest.getAddress(), emptyList());
+        CustomerEntity customerEntity = customerEntityProvider.provideCustomerEntity(createRequest.getFirstName(),
+                createRequest.getLastName(), createRequest.getFiscalCode(), createRequest.getAddress(), emptyList());
         CustomerEntity savedCustomerEntity = customerRepository.save(customerEntity);
         return customerDtoMapper.mapTo(customerEntityMapper.mapTo(savedCustomerEntity));
     }
