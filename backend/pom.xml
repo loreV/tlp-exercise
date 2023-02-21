@@ -50,6 +50,11 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc-openapi-ui.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.6.8</version>
+        </dependency>
         <!-- Spring boot uses junit 4.x by default, add junit 5.x -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

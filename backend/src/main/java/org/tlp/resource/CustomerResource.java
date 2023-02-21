@@ -1,6 +1,7 @@
 package org.tlp.resource;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -23,21 +24,25 @@ public class CustomerResource {
     }
 
     @GetMapping
+    @ApiOperation(value = "Get all customers")
     public List<CustomerDto> get() {
         return customerService.getAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Create a customer with no associated devices")
     public CustomerDto createCustomer(@RequestBody CustomerCreateRequest customerCreateRequest) {
         return customerService.create(customerCreateRequest);
     }
 
     @PutMapping("/{id}/device/{uuid}")
+    @ApiOperation(value = "Associates a device by Uuid to customer by Id")
     public CustomerDto associateDeviceToCustomer(@PathVariable Long id, @PathVariable(name = "uuid") String uuid) {
         return customerService.associateDeviceToCustomer(id, uuid);
     }
 
     @PatchMapping(value = "/{id}/address", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Update a customer address by customer Id")
     public CustomerDto updateAddress(@PathVariable Long id, @RequestBody CustomerAddressRequest customerAddressRequest) {
         return customerService.updateAddressForCustomerId(id, customerAddressRequest.getAddress());
     }
