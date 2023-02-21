@@ -16,10 +16,11 @@ Then, execute the application by `java -jar backend/target/TLPCustomerService-sp
 The service is up and running at `http://localhost:8991/api/v1/swagger-ui/index.html`.
 
 ## Testing
-As the project serves only as an exercise, the code coverage is purposely low: only some tests were written in order to provide room for discussion.
+Two types of tests can be found in the project: unit and integration test (with naming format `**IntegrationTest`).
+As the project serves only as an exercise and for time’s sake, the code coverage is purposely low: only some tests were written in order to provide room for discussion.
 
 ## Persistence
-The persistence layer is covered by in-mem H2 DB for the exercise sake.
+The persistence layer is covered by in-mem H2 DB, for dev comfort.
 
 ### OpenAPI
 By default, the openAPI v3 specs are exposed at `api/v1/api-docs`.
