@@ -9,16 +9,13 @@ import org.tlp.entity.CustomerEntity;
 import org.tlp.entity.DeviceEntity;
 import org.tlp.internal.Customer;
 import org.tlp.internal.Device;
-import org.tlp.resource.DeviceResource;
 
 import java.util.Collections;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerEntityMapperTest {

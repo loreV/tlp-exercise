@@ -7,6 +7,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.tlp.dto.CustomerDto;
 import org.tlp.entity.CustomerEntity;
+import org.tlp.entity.DeviceEntity;
+import org.tlp.exception.ForbiddenException;
+import org.tlp.exception.NotFoundItemException;
 import org.tlp.internal.Customer;
 import org.tlp.mapper.dto.CustomerDtoMapper;
 import org.tlp.mapper.entity.CustomerEntityMapper;
@@ -15,6 +18,7 @@ import org.tlp.repository.DeviceRepository;
 import org.tlp.resource.request.CustomerCreateRequest;
 import org.tlp.service.provider.CustomerEntityProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,7 @@ import static java.util.Collections.emptyList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -136,6 +141,92 @@ class CustomerServiceTest {
         assertEquals(expectedDtoMock, actual);
     }
 
+    @Test
+    void whenCustomerHasLessThanTwoDevices_shouldAssociateDevice() {
+        // given
+        Long anyId = 1L;
+        String deviceUuid = "myUuid";
+        List<DeviceEntity> deviceListMock = mock(ArrayList.class);
+        CustomerEntity customerEntityMock = mock(CustomerEntity.class);
+        DeviceEntity deviceEntityMock = mock(DeviceEntity.class);
+        Customer customerMock = mock(Customer.class);
+        CustomerDto expectedDtoMock = mock(CustomerDto.class);
+
+        when(customerEntityMapper.mapTo(customerEntityMock)).thenReturn(customerMock);
+        when(customerRepositoryMock.findById(anyId)).thenReturn(Optional.of(customerEntityMock));
+        when(deviceRepositoryMock.findByUuid(deviceUuid)).thenReturn(Optional.of(deviceEntityMock));
+        when(customerEntityMock.getAssociatedDevices()).thenReturn(deviceListMock);
+        when(deviceListMock.size()).thenReturn(0);
+
+        when(customerRepositoryMock.save(customerEntityMock)).thenReturn(customerEntityMock);
+        when(customerDtoMapperMock.mapTo(customerMock)).thenReturn(expectedDtoMock);
+
+        // when
+        final CustomerDto actual = sut.associateDeviceToCustomer(anyId, deviceUuid);
+
+        // then
+        verify(customerRepositoryMock, times(1))
+                .save(customerEntityMock);
+        verify(customerEntityMapper, times(1))
+                .mapTo(customerEntityMock);
+        verify(customerDtoMapperMock, times(1))
+                .mapTo(customerMock);
+        verify(customerRepositoryMock, times(1))
+                .save(customerEntityMock);
+        verify(deviceListMock, times(1))
+                .add(deviceEntityMock);
+
+        assertEquals(expectedDtoMock, actual);
+    }
+
+    @Test
+    void whenCustomerHasAlreadyTwoDevices_shouldThrowForbiddenException() {
+        // given
+        Long anyId = 1L;
+        String deviceUuid = "myUuid";
+        List<DeviceEntity> deviceListMock = mock(ArrayList.class);
+        CustomerEntity customerEntityMock = mock(CustomerEntity.class);
+        DeviceEntity deviceEntityMock = mock(DeviceEntity.class);
+
+        when(customerRepositoryMock.findById(anyId)).thenReturn(Optional.of(customerEntityMock));
+        when(deviceRepositoryMock.findByUuid(deviceUuid)).thenReturn(Optional.of(deviceEntityMock));
+        when(customerEntityMock.getAssociatedDevices()).thenReturn(deviceListMock);
+        when(deviceListMock.size()).thenReturn(2);
+
+        // when-then
+        assertThrows(ForbiddenException.class, () -> {
+            sut.associateDeviceToCustomer(anyId, deviceUuid);
+        });
+    }
+
+    @Test
+    void whenNoSuchDeviceExist_shouldThrowNotFoundItemException() {
+        // given
+        Long anyId = 1L;
+        String deviceUuid = "myUuid";
+
+        when(deviceRepositoryMock.findByUuid(deviceUuid)).thenReturn(Optional.empty());
+
+        // when-then
+        assertThrows(NotFoundItemException.class, () -> {
+            sut.associateDeviceToCustomer(anyId, deviceUuid);
+        });
+    }
+
+    @Test
+    void whenNoSuchCustomerExist_shouldThrowNotFoundItemException() {
+        // given
+        Long anyId = 1L;
+        String deviceUuid = "myUuid";
+
+        when(deviceRepositoryMock.findByUuid(deviceUuid)).thenReturn(Optional.of(mock(DeviceEntity.class)));
+        when(customerRepositoryMock.findById(anyId)).thenReturn(Optional.empty());
+
+        // when-then
+        assertThrows(NotFoundItemException.class, () -> {
+            sut.associateDeviceToCustomer(anyId, deviceUuid);
+        });
+    }
 
 
 }

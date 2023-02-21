@@ -1,6 +1,6 @@
 package org.tlp.resource;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
@@ -24,25 +24,25 @@ public class DeviceResource {
     }
 
     @GetMapping
-    @ApiOperation(value = "Get all devices")
+    @Operation(summary = "Get all devices")
     public List<DeviceDto> get() {
         return deviceService.getAll();
     }
 
     @PostMapping
-    @ApiOperation(value = "Create a device")
+    @Operation(summary = "Create a device")
     public DeviceDto create(@RequestBody DeviceDto deviceCreateRequest) {
         return deviceService.create(deviceCreateRequest);
     }
 
     @PutMapping("/{uuid}")
-    @ApiOperation(value = "Updates a device status and color")
+    @Operation(summary = "Updates a device status and color")
     public DeviceDto update(@PathVariable String uuid, @RequestBody DeviceUpdateRequest deviceUpdateRequest) {
         return deviceService.update(uuid, deviceUpdateRequest);
     }
 
     @RequestMapping(value = "/{uuid}", method = {RequestMethod.HEAD})
-    @ApiOperation(value = "Checks whether a device exists for the provided Uuid")
+    @Operation(summary = "Checks whether a device exists for the provided Uuid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Device not found"),
             @ApiResponse(responseCode = "302", description = "Device found")})
@@ -53,7 +53,7 @@ public class DeviceResource {
     }
 
     @DeleteMapping("/{uuid}")
-    @ApiOperation(value = "Deletes a device")
+    @Operation(summary = "Deletes a device")
     public void delete(@PathVariable String uuid) {
         deviceService.delete(uuid);
     }
