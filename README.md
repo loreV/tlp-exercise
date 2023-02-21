@@ -16,7 +16,7 @@ Then, execute the application by `java -jar backend/target/TLPCustomerService-sp
 The service is up and running at `http://localhost:8991/api/v1/swagger-ui/index.html`.
 
 ## Testing
-Two types of tests can be found in the project: unit and integration test (the latter with naming format `**IntegrationTest`).
+Two types of tests are included in this project repo: unit and integration tests (the latter with naming format `.*IntegrationTest.java`).
 
 As the project serves only as an exercise and for time’s sake, the code coverage is purposely low: only some tests were written in order to provide room for technical discussion.
 
