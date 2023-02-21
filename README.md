@@ -21,7 +21,7 @@ Two types of tests are included in this project repo: unit and integration tests
 As the project serves only as an exercise and for time’s sake, the code coverage is purposely low: only some tests were written in order to provide room for technical discussion.
 
 ## Persistence
-The persistence layer is covered by in-mem H2 DB, for dev comfort.
+Data is temporarily persisted by in-mem H2 DB, for dev comfort.
 
 ### OpenAPI
 By default, the openAPI v3 specs are exposed at `api/v1/api-docs`.
