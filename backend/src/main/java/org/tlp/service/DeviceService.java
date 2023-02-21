@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.tlp.dto.DeviceDto;
 import org.tlp.entity.DeviceEntity;
 import org.tlp.entity.DeviceStatusEntity;
+import org.tlp.exception.NotFoundItemException;
 import org.tlp.mapper.dto.DeviceDtoMapper;
 import org.tlp.mapper.entity.DeviceEntityMapper;
 import org.tlp.repository.DeviceRepository;
@@ -37,7 +38,7 @@ public class DeviceService {
     }
 
     public DeviceDto update(String uuid, DeviceUpdateRequest deviceUpdateRequest) {
-        DeviceEntity byUuid = deviceRepository.findByUuid(uuid);
+        DeviceEntity byUuid = deviceRepository.findByUuid(uuid).orElseThrow(NotFoundItemException::new);
         byUuid.setColor(deviceUpdateRequest.getColor());
         byUuid.setStatus(DeviceStatusEntity.valueOf(deviceUpdateRequest.getDeviceStatus().name()));
         return deviceDtoMapper.mapFrom(deviceEntityMapper.mapTo(deviceRepository.save(byUuid)));
@@ -48,7 +49,7 @@ public class DeviceService {
     }
 
     public boolean isDeviceExisting(String uuid) {
-        return deviceRepository.findByUuid(uuid) != null;
+        return deviceRepository.findByUuid(uuid).isPresent();
     }
 
     public DeviceDto create(DeviceDto deviceCreateRequest) {

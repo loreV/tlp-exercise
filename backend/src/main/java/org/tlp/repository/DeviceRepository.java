@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.tlp.entity.DeviceEntity;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface DeviceRepository extends CrudRepository<DeviceEntity, Long> {
     List<DeviceEntity> findAll();
@@ -18,5 +20,5 @@ public interface DeviceRepository extends CrudRepository<DeviceEntity, Long> {
     @Query("delete from Device b where b.uuid=:uuid")
     void deleteDevice(@Param("uuid") String uuid);
 
-    DeviceEntity findByUuid(String uuid);
+    Optional<DeviceEntity> findByUuid(String uuid);
 }

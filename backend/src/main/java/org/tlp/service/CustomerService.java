@@ -5,6 +5,7 @@ import org.tlp.dto.CustomerDto;
 import org.tlp.entity.CustomerEntity;
 import org.tlp.entity.DeviceEntity;
 import org.tlp.exception.ForbiddenException;
+import org.tlp.exception.NotFoundItemException;
 import org.tlp.mapper.dto.CustomerDtoMapper;
 import org.tlp.mapper.entity.CustomerEntityMapper;
 import org.tlp.repository.CustomerRepository;
@@ -13,7 +14,6 @@ import org.tlp.resource.request.CustomerCreateRequest;
 import org.tlp.service.provider.CustomerEntityProvider;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -66,9 +66,10 @@ public class CustomerService {
     }
 
     public CustomerDto associateDeviceToCustomer(Long id, String deviceUuid) {
-        DeviceEntity deviceForAssociation = deviceRepository.findByUuid(deviceUuid);
+        DeviceEntity deviceForAssociation = deviceRepository.findByUuid(deviceUuid)
+                .orElseThrow(NotFoundItemException::new);
         Optional<CustomerEntity> byId = customerRepository.findById(id);
-        CustomerEntity customerEntity = byId.orElseThrow(NoSuchElementException::new);
+        CustomerEntity customerEntity = byId.orElseThrow(NotFoundItemException::new);
         ensureCustomerEntityHasNoReachedDeviceAssociationLimit(customerEntity);
         customerEntity.getAssociatedDevices().add(deviceForAssociation);
         CustomerEntity save = customerRepository.save(customerEntity);
