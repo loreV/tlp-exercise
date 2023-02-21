@@ -72,7 +72,7 @@ class CustomerResourceTest {
         when(customerServiceMock.create(anyCustomerCreateRequest)).thenReturn(expectedCreatedCustomerMock);
 
         // when
-        final CustomerDto actualCustomer = sut.createCustomer(anyCustomerCreateRequest);
+        final CustomerDto actualCustomer = sut.create(anyCustomerCreateRequest);
 
         // then
         verify(customerServiceMock, times(1))

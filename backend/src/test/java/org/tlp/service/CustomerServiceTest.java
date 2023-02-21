@@ -101,6 +101,17 @@ class CustomerServiceTest {
     }
 
     @Test
+    void whenUpdatingAddressForNotExistingCustomer_shouldThrowException() {
+        // given
+        Long anyId = 1L;
+        String anyAddress = "myAddress";
+        when(customerRepositoryMock.findById(anyId)).thenReturn(Optional.empty());
+
+        // when-then
+        assertThrows(NotFoundItemException.class, ()-> sut.updateAddressForCustomerId(anyId, anyAddress));
+    }
+
+    @Test
     void shouldCreateCustomer() {
         // given
         String expectedAddress = "myAddress";
@@ -194,9 +205,7 @@ class CustomerServiceTest {
         when(deviceListMock.size()).thenReturn(2);
 
         // when-then
-        assertThrows(ForbiddenException.class, () -> {
-            sut.associateDeviceToCustomer(anyId, deviceUuid);
-        });
+        assertThrows(ForbiddenException.class, () -> sut.associateDeviceToCustomer(anyId, deviceUuid));
     }
 
     @Test
@@ -208,9 +217,7 @@ class CustomerServiceTest {
         when(deviceRepositoryMock.findByUuid(deviceUuid)).thenReturn(Optional.empty());
 
         // when-then
-        assertThrows(NotFoundItemException.class, () -> {
-            sut.associateDeviceToCustomer(anyId, deviceUuid);
-        });
+        assertThrows(NotFoundItemException.class, () -> sut.associateDeviceToCustomer(anyId, deviceUuid));
     }
 
     @Test
@@ -223,9 +230,7 @@ class CustomerServiceTest {
         when(customerRepositoryMock.findById(anyId)).thenReturn(Optional.empty());
 
         // when-then
-        assertThrows(NotFoundItemException.class, () -> {
-            sut.associateDeviceToCustomer(anyId, deviceUuid);
-        });
+        assertThrows(NotFoundItemException.class, () -> sut.associateDeviceToCustomer(anyId, deviceUuid));
     }
 
 

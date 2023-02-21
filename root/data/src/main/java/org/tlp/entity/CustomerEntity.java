@@ -10,7 +10,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="CUSTOMER_ENTITY_ID")
     private List<DeviceEntity> associatedDevices;
     private String firstName;

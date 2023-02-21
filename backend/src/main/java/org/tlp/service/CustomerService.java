@@ -22,6 +22,7 @@ import static java.util.Collections.emptyList;
 @Service
 public class CustomerService {
 
+    private static final int MAX_NUMBER_OF_CUSTOMER_ASSOCIATED_DEVICES = 2;
     private final CustomerRepository customerRepository;
     private final DeviceRepository deviceRepository;
     private final CustomerDtoMapper customerDtoMapper;
@@ -49,7 +50,7 @@ public class CustomerService {
 
     public CustomerDto updateAddressForCustomerId(Long id, String address) {
         Optional<CustomerEntity> byId = customerRepository.findById(id);
-        CustomerEntity customerEntity = byId.orElseThrow();
+        CustomerEntity customerEntity = byId.orElseThrow(NotFoundItemException::new);
         customerEntity.setAddress(address);
         return customerDtoMapper.mapTo(
                 customerEntityMapper.mapTo(
@@ -77,7 +78,8 @@ public class CustomerService {
     }
 
     private static void ensureCustomerEntityHasNoReachedDeviceAssociationLimit(CustomerEntity customerEntity) {
-        if (customerEntity.getAssociatedDevices().size() > 1) {
+        if (customerEntity.getAssociatedDevices().size() >=
+                MAX_NUMBER_OF_CUSTOMER_ASSOCIATED_DEVICES) {
             throw new ForbiddenException();
         }
     }

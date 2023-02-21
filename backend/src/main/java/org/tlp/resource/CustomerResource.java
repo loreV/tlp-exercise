@@ -31,11 +31,11 @@ public class CustomerResource {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create a customer with no associated devices")
-    public CustomerDto createCustomer(@RequestBody CustomerCreateRequest customerCreateRequest) {
+    public CustomerDto create(@RequestBody CustomerCreateRequest customerCreateRequest) {
         return customerService.create(customerCreateRequest);
     }
 
-    @PutMapping("/{id}/device/{uuid}")
+    @PutMapping(value = "/{id}/device/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Associates a device by Uuid to customer by Id")
     public CustomerDto associateDeviceToCustomer(@PathVariable Long id, @PathVariable(name = "uuid") String uuid) {
         return customerService.associateDeviceToCustomer(id, uuid);
