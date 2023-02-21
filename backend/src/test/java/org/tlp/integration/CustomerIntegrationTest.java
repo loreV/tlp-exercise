@@ -67,9 +67,7 @@ public class CustomerIntegrationTest {
     @Test
     void whenCustomerDoesNotExistOnUpdateAddress_shouldThrowNotFoundException() {
         // given
-        CustomerCreateRequest createRequest = new CustomerCreateRequest("myName", "myLastName", "myFiscalCode", "myAddress");
         String anyAddress = "Any address, 44/a";
-        CustomerDto createdCustomer = sut.create(createRequest);
         Long anyNotExistingCustomerId = 12345L;
 
         // when-then
