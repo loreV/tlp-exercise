@@ -14,7 +14,7 @@ public class DeviceEntityStatusMapper implements Mapper<DeviceStatus, DeviceStat
     public DeviceStatusEntity mapTo(DeviceStatus obj) {
         return Arrays.stream(DeviceStatusEntity.values())
                 .filter(it-> it.name().equals(obj.name())).findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(IllegalStateException::new);
     }
 
     @Override
