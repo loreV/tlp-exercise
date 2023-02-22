@@ -22,6 +22,6 @@ public class DeviceDtoMapper implements Mapper<DeviceDto, Device> {
     }
     @Override
     public DeviceDto mapFrom(Device obj) {
-        return new DeviceDto(obj.uuid(), obj.color(), deviceStatusMapper.mapFrom(obj.status()));
+        return new DeviceDto(obj.getUuid(), obj.getColor(), deviceStatusMapper.mapFrom(obj.getStatus()));
     }
 }

@@ -22,7 +22,7 @@ public class DeviceEntityMapper implements Mapper<DeviceEntity, Device> {
 
     @Override
     public DeviceEntity mapFrom(Device obj) {
-        return new DeviceEntity(obj.uuid(), obj.color(),
-                deviceEntityStatusMapper.mapTo(obj.status()));
+        return new DeviceEntity(obj.getUuid(), obj.getColor(),
+                deviceEntityStatusMapper.mapTo(obj.getStatus()));
     }
 }

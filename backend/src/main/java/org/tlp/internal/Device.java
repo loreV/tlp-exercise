@@ -20,19 +20,19 @@ public class Device {
         this.status = status;
     }
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
-    public String uuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public String color() {
+    public String getColor() {
         return color;
     }
 
-    public DeviceStatus status() {
+    public DeviceStatus getStatus() {
         return status;
     }
 
