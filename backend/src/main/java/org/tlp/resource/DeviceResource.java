@@ -37,6 +37,8 @@ public class DeviceResource {
 
     @PutMapping("/{uuid}")
     @Operation(summary = "Updates a device status and color")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Device not found")})
     public DeviceDto update(@PathVariable String uuid, @RequestBody DeviceUpdateRequest deviceUpdateRequest) {
         return deviceService.update(uuid, deviceUpdateRequest);
     }
@@ -46,20 +48,20 @@ public class DeviceResource {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Device not found"),
             @ApiResponse(responseCode = "302", description = "Device found")})
-    public ResponseEntity<String> checkExistence(@PathVariable String uuid){
+    public ResponseEntity<String> checkExistence(@PathVariable String uuid) {
         boolean deviceExisting = deviceService.isDeviceExisting(uuid);
         HttpStatusCode responseStatusBuilder = getResponseStatusBuilder(deviceExisting);
         return ResponseEntity.status(responseStatusBuilder).build();
     }
 
     @DeleteMapping("/{uuid}")
-    @Operation(summary = "Deletes a device")
+    @Operation(summary = "Ensures target device deletion for the provided Uuid")
     public void delete(@PathVariable String uuid) {
         deviceService.delete(uuid);
     }
 
     private HttpStatusCode getResponseStatusBuilder(boolean isDeviceExisting) {
-        if(isDeviceExisting){
+        if (isDeviceExisting) {
             return HttpStatus.FOUND;
         }
         return HttpStatus.NOT_FOUND;
