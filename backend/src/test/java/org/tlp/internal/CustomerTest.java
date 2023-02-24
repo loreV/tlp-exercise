@@ -51,6 +51,7 @@ class CustomerTest {
                 address, associatedDevices);
 
         assertEquals(customer, customer2);
+        assertEquals(customer.hashCode(), customer2.hashCode());
     }
 
 
