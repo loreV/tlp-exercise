@@ -22,7 +22,5 @@ Alternatively, to interact directly with the REST API, the Swagger UI can be fou
 ## Testing
 Two types of tests are included in this project repo: unit and integration tests (the latter with naming format `.*IntegrationTest.java`).
 
-As the project serves only as an exercise and for time’s sake, the code coverage is purposely low: only some tests were written in order to provide room for technical discussion.
-
 ## Persistence
 Data is temporarily persisted by in-mem H2 DB, for dev comfort.
