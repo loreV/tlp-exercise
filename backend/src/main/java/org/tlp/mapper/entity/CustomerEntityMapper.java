@@ -24,7 +24,7 @@ public class CustomerEntityMapper implements Mapper<CustomerEntity, Customer> {
 
     @Override
     public CustomerEntity mapFrom(Customer obj) {
-        return new CustomerEntity(obj.firstName(), obj.lastName(), obj.fiscalCode(), obj.address(),
-                obj.associatedDevices().stream().map(deviceEntityMapper::mapFrom).collect(toList()));
+        return new CustomerEntity(obj.getFirstName(), obj.getLastName(), obj.getFiscalCode(), obj.getAddress(),
+                obj.getAssociatedDevices().stream().map(deviceEntityMapper::mapFrom).collect(toList()));
     }
 }

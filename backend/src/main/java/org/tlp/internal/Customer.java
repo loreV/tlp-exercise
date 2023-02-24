@@ -27,27 +27,27 @@ public class Customer {
         this.associatedDevices = associatedDevices;
     }
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
-    public String firstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public String lastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public String fiscalCode() {
+    public String getFiscalCode() {
         return fiscalCode;
     }
 
-    public String address() {
+    public String getAddress() {
         return address;
     }
 
-    public List<Device> associatedDevices() {
+    public List<Device> getAssociatedDevices() {
         return associatedDevices;
     }
 

@@ -52,11 +52,11 @@ class CustomerEntityMapperTest {
                 .mapTo(deviceEntity);
         verifyNoMoreInteractions(deviceEntityMapper);
 
-        assertEquals(expectedName, actual.firstName());
-        assertEquals(expectedLastName, actual.lastName());
-        assertEquals(expectedFiscalCode, actual.fiscalCode());
-        assertEquals(expectedAddress, actual.address());
-        assertThat(actual.associatedDevices(), hasItem(expectedDevice));
+        assertEquals(expectedName, actual.getFirstName());
+        assertEquals(expectedLastName, actual.getLastName());
+        assertEquals(expectedFiscalCode, actual.getFiscalCode());
+        assertEquals(expectedAddress, actual.getAddress());
+        assertThat(actual.getAssociatedDevices(), hasItem(expectedDevice));
     }
 
     @Test

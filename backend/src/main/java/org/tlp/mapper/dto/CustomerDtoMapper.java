@@ -6,8 +6,6 @@ import org.tlp.dto.CustomerDto;
 import org.tlp.internal.Customer;
 import org.tlp.mapper.Mapper;
 
-import java.util.stream.Collectors;
-
 import static java.util.stream.Collectors.*;
 
 @Component
@@ -22,15 +20,15 @@ public class CustomerDtoMapper implements Mapper<Customer, CustomerDto> {
 
     @Override
     public CustomerDto mapTo(Customer obj) {
-        return new CustomerDto(obj.id(), obj.firstName(), obj.lastName(),
-                obj.fiscalCode(), obj.address(),
-                obj.associatedDevices().stream().map(deviceDtoMapper::mapFrom)
+        return new CustomerDto(obj.getId(), obj.getFirstName(), obj.getLastName(),
+                obj.getFiscalCode(), obj.getAddress(),
+                obj.getAssociatedDevices().stream().map(deviceDtoMapper::mapFrom)
                         .collect(toList()));
     }
 
     @Override
     public Customer mapFrom(CustomerDto obj) {
-        return new Customer(null, obj.getFirstName(), obj.getLastName(),
+        return new Customer(obj.getId(), obj.getFirstName(), obj.getLastName(),
                 obj.getFiscalCode(), obj.getAddress(),
                 obj.getAssociatedDevices().stream().map(deviceDtoMapper::mapTo)
                         .collect(toList()));

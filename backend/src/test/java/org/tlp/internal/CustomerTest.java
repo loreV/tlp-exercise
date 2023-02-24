@@ -24,12 +24,12 @@ class CustomerTest {
                 lastName, fiscalCode,
                 address, associatedDevices);
 
-        assertEquals(id, customer.id());
-        assertEquals(firstName, customer.firstName());
-        assertEquals(lastName, customer.lastName());
-        assertEquals(fiscalCode, customer.fiscalCode());
-        assertEquals(address, customer.address());
-        assertEquals(associatedDevices, customer.associatedDevices());
+        assertEquals(id, customer.getId());
+        assertEquals(firstName, customer.getFirstName());
+        assertEquals(lastName, customer.getLastName());
+        assertEquals(fiscalCode, customer.getFiscalCode());
+        assertEquals(address, customer.getAddress());
+        assertEquals(associatedDevices, customer.getAssociatedDevices());
     }
 
     @Test
