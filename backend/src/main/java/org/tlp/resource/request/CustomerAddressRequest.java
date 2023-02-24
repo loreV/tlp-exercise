@@ -13,7 +13,4 @@ public class CustomerAddressRequest {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
