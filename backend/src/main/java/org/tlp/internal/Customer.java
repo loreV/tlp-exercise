@@ -69,15 +69,4 @@ public class Customer {
         return Objects.hash(id, firstName, lastName, fiscalCode, address, associatedDevices);
     }
 
-    @Override
-    public String toString() {
-        return "Customer[" +
-                "id=" + id + ", " +
-                "firstName=" + firstName + ", " +
-                "lastName=" + lastName + ", " +
-                "fiscalCode=" + fiscalCode + ", " +
-                "address=" + address + ", " +
-                "associatedDevices=" + associatedDevices + ']';
-    }
-
 }

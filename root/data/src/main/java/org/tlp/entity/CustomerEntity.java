@@ -3,6 +3,7 @@ package org.tlp.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -58,31 +59,23 @@ public class CustomerEntity {
     public void setAssociatedDevices(List<DeviceEntity> associatedDevices) {
         this.associatedDevices = associatedDevices;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFiscalCode(String fiscalCode) {
-        this.fiscalCode = fiscalCode;
-    }
-
+    
     public void setAddress(String address) {
         this.address = address;
     }
 
     @Override
-    public String toString() {
-        return "CustomerEntity{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", fiscalCode='" + fiscalCode + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerEntity that = (CustomerEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(associatedDevices, that.associatedDevices)
+                && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) &&
+                Objects.equals(fiscalCode, that.fiscalCode) && Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, associatedDevices, firstName, lastName, fiscalCode, address);
     }
 }

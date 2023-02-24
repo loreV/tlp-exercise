@@ -52,13 +52,4 @@ public class Device {
         return Objects.hash(id, uuid, color, status);
     }
 
-    @Override
-    public String toString() {
-        return "Device[" +
-                "id=" + id + ", " +
-                "uuid=" + uuid + ", " +
-                "color=" + color + ", " +
-                "status=" + status + ']';
-    }
-
 }

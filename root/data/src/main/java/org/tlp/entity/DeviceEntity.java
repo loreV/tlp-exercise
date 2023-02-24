@@ -2,6 +2,8 @@ package org.tlp.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity(name = "Device")
 @Table(name = "Device")
 public class DeviceEntity {
@@ -60,9 +62,17 @@ public class DeviceEntity {
     }
 
     @Override
-    public String toString() {
-        return "DeviceEntity{" + "id=" + id + ", uuid='" + uuid + '\'' + ", color='" + color + '\'' + ", status=" + status + '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeviceEntity that = (DeviceEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(uuid, that.uuid) &&
+                Objects.equals(color, that.color) && status == that.status &&
+                Objects.equals(customerEntity, that.customerEntity);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, uuid, color, status, customerEntity);
+    }
 }
