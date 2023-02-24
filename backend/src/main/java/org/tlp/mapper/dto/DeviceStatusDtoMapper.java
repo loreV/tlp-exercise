@@ -8,7 +8,7 @@ import org.tlp.mapper.Mapper;
 import java.util.Arrays;
 
 @Component
-public class DeviceStatusMapper implements Mapper<DeviceStatusDto, org.tlp.internal.DeviceStatus> {
+public class DeviceStatusDtoMapper implements Mapper<DeviceStatusDto, org.tlp.internal.DeviceStatus> {
 
     @Override
     public DeviceStatus mapTo(DeviceStatusDto obj) {

@@ -8,20 +8,20 @@ import org.tlp.mapper.Mapper;
 @Component
 public class DeviceDtoMapper implements Mapper<DeviceDto, Device> {
 
-    private final DeviceStatusMapper deviceStatusMapper;
+    private final DeviceStatusDtoMapper deviceStatusDtoMapper;
 
-    public DeviceDtoMapper(DeviceStatusMapper deviceStatusMapper) {
-        this.deviceStatusMapper = deviceStatusMapper;
+    public DeviceDtoMapper(DeviceStatusDtoMapper deviceStatusDtoMapper) {
+        this.deviceStatusDtoMapper = deviceStatusDtoMapper;
     }
 
     @Override
     public Device mapTo(DeviceDto obj) {
         return new Device(null, obj.getUuid(),
                 obj.getColor(),
-                deviceStatusMapper.mapTo(obj.getStatus()));
+                deviceStatusDtoMapper.mapTo(obj.getStatus()));
     }
     @Override
     public DeviceDto mapFrom(Device obj) {
-        return new DeviceDto(obj.getUuid(), obj.getColor(), deviceStatusMapper.mapFrom(obj.getStatus()));
+        return new DeviceDto(obj.getUuid(), obj.getColor(), deviceStatusDtoMapper.mapFrom(obj.getStatus()));
     }
 }
