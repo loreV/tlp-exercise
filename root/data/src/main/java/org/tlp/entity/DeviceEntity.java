@@ -53,14 +53,6 @@ public class DeviceEntity {
         this.status = status;
     }
 
-    public CustomerEntity getCustomerEntity() {
-        return customerEntity;
-    }
-
-    public void setCustomerEntity(CustomerEntity customerEntity) {
-        this.customerEntity = customerEntity;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
