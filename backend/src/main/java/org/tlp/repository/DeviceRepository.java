@@ -21,4 +21,5 @@ public interface DeviceRepository extends CrudRepository<DeviceEntity, Long> {
     void deleteDevice(@Param("uuid") String uuid);
 
     Optional<DeviceEntity> findByUuid(String uuid);
+    boolean existsByUuid(String uuid);
 }

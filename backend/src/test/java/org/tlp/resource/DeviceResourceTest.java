@@ -82,14 +82,14 @@ class DeviceResourceTest {
     void onCheckingExistenceAndDeviceExist_shouldReturnStatusWithCodeFound() {
         // given
         String anyUuid = "anyUuid";
-        when(deviceServiceMock.isDeviceExisting(anyUuid)).thenReturn(true);
+        when(deviceServiceMock.doesDeviceExist(anyUuid)).thenReturn(true);
 
         // when
         ResponseEntity<String> stringResponseEntity = sut.checkExistence(anyUuid);
 
         // then
         verify(deviceServiceMock, times(1))
-                .isDeviceExisting(anyUuid);
+                .doesDeviceExist(anyUuid);
         verifyNoMoreInteractions(deviceServiceMock);
         assertEquals(HttpStatusCode.valueOf(302), stringResponseEntity.getStatusCode());
     }
@@ -98,14 +98,14 @@ class DeviceResourceTest {
     void onCheckingExistenceAndDeviceNotExist_shouldReturnStatusWithCodeNotFound() {
         // given
         String anyUuid = "anyUuid";
-        when(deviceServiceMock.isDeviceExisting(anyUuid)).thenReturn(false);
+        when(deviceServiceMock.doesDeviceExist(anyUuid)).thenReturn(false);
 
         // when
         ResponseEntity<String> stringResponseEntity = sut.checkExistence(anyUuid);
 
         // then
         verify(deviceServiceMock, times(1))
-                .isDeviceExisting(anyUuid);
+                .doesDeviceExist(anyUuid);
         verifyNoMoreInteractions(deviceServiceMock);
         assertEquals(HttpStatusCode.valueOf(404), stringResponseEntity.getStatusCode());
 

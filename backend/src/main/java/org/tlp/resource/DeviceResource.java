@@ -49,7 +49,7 @@ public class DeviceResource {
             @ApiResponse(responseCode = "404", description = "Device not found"),
             @ApiResponse(responseCode = "302", description = "Device found")})
     public ResponseEntity<String> checkExistence(@PathVariable String uuid) {
-        boolean deviceExisting = deviceService.isDeviceExisting(uuid);
+        boolean deviceExisting = deviceService.doesDeviceExist(uuid);
         HttpStatusCode responseStatusBuilder = getResponseStatusBuilder(deviceExisting);
         return ResponseEntity.status(responseStatusBuilder).build();
     }
