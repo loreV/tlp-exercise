@@ -13,7 +13,7 @@
 
     <groupId>org.tlp</groupId>
     <artifactId>exercise-root</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
     <name>Tlp Exercise</name>
     <description>Tlp exercise to get hired!</description>
     <packaging>pom</packaging>
